@@ -1,0 +1,40 @@
+ADR 3: Resource-oriented, hierarchical API
+==========================================
+
+Context
+-------
+
+We don't currently have any explicitly agreed conventions or patterns for how we
+structure our API. This slows us down for two main reasons:
+
+- it isn't possible to design a new piece of functionality with confidence that
+  it reflects the team's collective API design conventions.
+
+- API proposals require feedback from all back-end developers before we can
+  confidently start to implement them.
+
+Decision
+--------
+
+We're going to build our API in a broadly RESTful style (with standard HTTP
+verbs operating on resources at URLs).
+
+We'll nest resources liberally. For instance, when flagging an annotation for a
+moderator's attention, we would use a ``PUT`` request to a sub-resource of the
+annotation at, say, ``/api/annotations/<annid>/flag``, rather than making a
+``PUT`` request to ``/api/flags`` with the annotation ID in the request body. We
+could then make a ``DELETE`` request to the same URL to reverse the operation.
+
+One advantage of this method is that parameters can often be made mandatory by
+construction: in the example above, it becomes impossible to flag an annotation
+without providing the annotation ID.
+
+Status
+------
+
+Proposed.
+
+Consequences
+------------
+
+TODO
