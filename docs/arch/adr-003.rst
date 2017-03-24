@@ -36,16 +36,36 @@ standard HTTP verbs operating on resources at URLs).
 
 We'll nest resources liberally. For instance, when flagging an annotation for a
 moderator's attention, we would use a ``PUT`` request to a sub-resource of the
-annotation at, say, ``/api/annotations/<annid>/flag``, rather than making a
-``PUT`` request to ``/api/flags`` with the annotation ID in the request body. We
-could then make a ``DELETE`` request to the same URL to reverse the operation.
-This is similar to the approach GitHub takes for `locking issues`_.
+annotation::
 
-.. _locking issues: https://developer.github.com/v3/issues/#lock-an-issue
+  PUT /api/annotations/<annid>/flag
+  Content-Type: application/json
+  
+  {"reason": "spam"}
 
 One advantage of this method is that parameters can often be made mandatory by
 construction: in the example above, it becomes impossible to flag an annotation
-without providing the annotation ID.
+without providing the annotation ID. This is similar to the approach GitHub
+takes for `locking issues`_.
+
+.. _locking issues: https://developer.github.com/v3/issues/#lock-an-issue
+
+The operation to remove such a flag would then be expressed with a ``DELETE``
+request to the same URL::
+
+  DELETE /api/annotations/<annid>/flag
+
+An example of a pattern we are *not* choosing to follow is to post these flags
+as top-level entities::
+
+  POST /api/flags
+  Content-Type: application/json
+
+  {"annotation": "<annid>"}
+
+While this is a reasonable approach to take, we think that the more hierarchical
+approach will make the relationships between different entities (in this case,
+annotations and their associated flags) easier to understand.
 
 Status
 ------
