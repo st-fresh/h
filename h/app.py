@@ -131,6 +131,7 @@ def includeme(config):
     config.include('h.db')
     config.include('h.features')
     config.include('h.form')
+    config.include('h.formatters')
     config.include('h.indexer')
     config.include('h.panels')
     config.include('h.realtime')
