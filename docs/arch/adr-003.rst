@@ -20,9 +20,12 @@ Extra context
 
 The part of our API that deals with creating, retrieving and modifying
 annotations is currently resource-based, with ``GET``, ``POST``, ``PATCH`` and
-``DELETE`` requests to suitable URLs.
+``DELETE`` requests to suitable URLs. This is also the style used in the W3C
+`Web Annotation Protocol`_.
 
-Some examples of APIs that could provide inspiration:
+.. _Web Annotation Protocol: https://www.w3.org/TR/annotation-protocol/
+
+Some examples of other APIs that could provide inspiration:
 
 - The `GitHub API <https://developer.github.com/v3/>`_ (resource-based,
   hierarchical style)
